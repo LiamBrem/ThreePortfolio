@@ -20,19 +20,16 @@ document.addEventListener('click', function () {
 	controls.lock();
   }, false);
 
+//add skybox using the image in public folder
+const skybox = new THREE.Mesh(
+	new THREE.SphereGeometry(1000, 32, 32),
+	new THREE.MeshBasicMaterial({
+	  map: new THREE.TextureLoader().load('skybox.jpg'),
+	  side: THREE.DoubleSide,
+	})
+  );
 
-var skyGeo = new THREE.SphereGeometry(10000, 25, 25); 
-var textureLoader  = new THREE.TextureLoader();
-var skyTexture = textureLoader.load( "/kloofendal_43d_clear_puresky_4k.jpg" );
-
-var skyMaterial = new THREE.MeshStandardMaterial({ 
-	map: skyTexture,
-});
-
-var sky = new THREE.Mesh(skyGeo, skyMaterial);
-sky.material.side = THREE.BackSide;
-scene.add(sky);
-
+scene.add(skybox);
 
 const geometry = new THREE.PlaneGeometry( 10, 30 );
 const material = new THREE.MeshStandardMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
