@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
 
@@ -14,8 +14,6 @@ document.body.appendChild( renderer.domElement );
 
 const controls = new PointerLockControls(camera, document.body);
 
-controls.movementSpeed = 1;
-controls.lookSpeed = 0.005;
 
 document.addEventListener('click', function () {
 	controls.lock();
@@ -23,11 +21,6 @@ document.addEventListener('click', function () {
 
 const geometry = new THREE.PlaneGeometry( 10, 10 );
 const material = new THREE.MeshStandardMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-const plane = new THREE.Mesh( geometry, material );
-
-plane.rotation.x = 0;
-plane.rotation.y = 0;
-plane.rotation.z = 0;
 
 //add several planes to make a ground surface
 const ground = new THREE.Group();
@@ -36,25 +29,103 @@ for (let i = 0; i < 10; i++) {
 		const plane = new THREE.Mesh( geometry, material );
 		plane.position.x = i * 10;
 		plane.position.z = j * 10;
-		plane.rotation.x = 90;
+		//make it rotate so the planes are flat'
+		plane.rotation.x = Math.PI / 2;
+		
+
+
 		ground.add(plane);
 	}
 }
-
 scene.add(ground);
 
+const loader = new GLTFLoader();
+
+loader.load( '/House_001_GLB.glb', function ( gltf ) {
+
+	scene.add( gltf.scene );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
 camera.position.z = 10;
+camera.position.y = 10;
 
 
 const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
 scene.add( light );
 
+let keys = {
+	up: false, // w
+	down: false, // s
+	left: false, // a
+	right: false, // d
+  };
+
+
+window.addEventListener('keydown', (e) => {
+	switch (e.key) {
+	  case 'w':
+		keys.up = true;
+		break;
+	  case 's':
+		keys.down = true;
+		break;
+	  case 'a':
+		keys.left = true;
+		break;
+	  case 'd':
+		keys.right = true;
+		break;
+	}
+  });
+  
+  window.addEventListener('keyup', (e) => {
+	switch (e.key) {
+	  case 'w':
+		keys.up = false;
+		break;
+	  case 's':
+		keys.down = false;
+		break;
+	  case 'a':
+		keys.left = false;
+		break;
+	  case 'd':
+		keys.right = false;
+		break;
+	}
+  });
+
 
 function animate() {
+	const speed = 1; // adjust as needed
+	const direction = new THREE.Vector3();
+
+	camera.getWorldDirection(direction);
+	direction.y = 0; // ignore vertical direction
+	direction.normalize(); // normalize to ensure consistent speed
+
+	if (keys.up) {
+		camera.position.add(direction.multiplyScalar(speed));
+	}
+	if (keys.down) {
+		camera.position.sub(direction.multiplyScalar(speed));
+	}
+
+	direction.cross(camera.up); // get right direction
+
+	if (keys.left) {
+		camera.position.sub(direction.multiplyScalar(speed));
+	}
+	if (keys.right) {
+		camera.position.add(direction.multiplyScalar(speed));
+	}
+  
 	requestAnimationFrame( animate );
-
-
-
 	renderer.render( scene, camera );
 }
 
