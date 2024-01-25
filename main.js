@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const loader = new GLTFLoader();
 
 
 const renderer = new THREE.WebGLRenderer();
@@ -19,27 +20,40 @@ document.addEventListener('click', function () {
 	controls.lock();
   }, false);
 
-const geometry = new THREE.PlaneGeometry( 10, 10 );
+
+var skyGeo = new THREE.SphereGeometry(10000, 25, 25); 
+var textureLoader  = new THREE.TextureLoader();
+var skyTexture = textureLoader.load( "/kloofendal_43d_clear_puresky_4k.jpg" );
+
+var skyMaterial = new THREE.MeshStandardMaterial({ 
+	map: skyTexture,
+});
+
+var sky = new THREE.Mesh(skyGeo, skyMaterial);
+sky.material.side = THREE.BackSide;
+scene.add(sky);
+
+
+const geometry = new THREE.PlaneGeometry( 10, 30 );
 const material = new THREE.MeshStandardMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
 
 //add several planes to make a ground surface
 const ground = new THREE.Group();
 for (let i = 0; i < 10; i++) {
-	for (let j = 0; j < 10; j++) {
-		const plane = new THREE.Mesh( geometry, material );
-		plane.position.x = i * 10;
-		plane.position.z = j * 10;
-		//make it rotate so the planes are flat'
-		plane.rotation.x = Math.PI / 2;
-		
+
+	const plane = new THREE.Mesh( geometry, material );
+	plane.position.x = i * 10;
+	//make it rotate so the planes are flat'
+	plane.rotation.x = Math.PI / 2;
+	
 
 
-		ground.add(plane);
-	}
+	ground.add(plane);
+	
 }
 scene.add(ground);
 
-const loader = new GLTFLoader();
+
 
 loader.load( '/House_001_GLB.glb', function ( gltf ) {
 
@@ -51,11 +65,10 @@ loader.load( '/House_001_GLB.glb', function ( gltf ) {
 
 } );
 
-camera.position.z = 10;
-camera.position.y = 10;
+camera.position.y = 5;
 
 
-const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+const light = new THREE.AmbientLight( 0xffffbb, 0x080820, 1 );
 scene.add( light );
 
 let keys = {
@@ -99,6 +112,9 @@ window.addEventListener('keydown', (e) => {
 		break;
 	}
   });
+
+
+
 
 
 function animate() {
