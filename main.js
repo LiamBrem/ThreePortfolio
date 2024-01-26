@@ -41,7 +41,7 @@ loader.load( '/House_001_GLB.glb', function ( gltf ) {
 
 } );
 
-camera.position.y = 3;
+camera.position.y = 2;
 
 
 const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
