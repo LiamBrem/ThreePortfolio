@@ -31,9 +31,10 @@ const ground = createGround();
 scene.add(ground);
 
 
-loader.load( '/Buildings/Stone Tower.glb', function ( gltf ) {
+loader.load( 'Valley Terrain.glb', function ( gltf ) {
 
 	gltf.scene.scale.set(3, 3, 3);
+	gltf.scene.position.set(10, -12.75, -10);
 
 	scene.add( gltf.scene );
 
@@ -42,6 +43,7 @@ loader.load( '/Buildings/Stone Tower.glb', function ( gltf ) {
 	console.error( error );
 
 } );
+
 
 loader.load( '/Buildings/Mill.glb', function ( gltf ) {
 
@@ -58,7 +60,9 @@ loader.load( '/Buildings/Mill.glb', function ( gltf ) {
 camera.position.y = 2;
 
 
-const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+const light = new THREE.DirectionalLight( 0xffffff, 7 );
+light.position.z = 50;
+light.position.y = 100;
 scene.add( light );
 
 
