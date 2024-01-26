@@ -22,10 +22,10 @@ document.addEventListener('click', function () {
 
 //add skybox using the image in public folder
 const skybox = new THREE.Mesh(
-	new THREE.SphereGeometry(1000, 32, 32),
+	new THREE.SphereGeometry(750, 32, 32),
 	new THREE.MeshBasicMaterial({
-	  map: new THREE.TextureLoader().load('skybox.jpg'),
-	  side: THREE.DoubleSide,
+	  map: new THREE.TextureLoader().load('/BlueSkySkybox.png'),
+	  side: THREE.BackSide,
 	})
   );
 
