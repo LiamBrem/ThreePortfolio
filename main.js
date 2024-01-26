@@ -2,54 +2,33 @@ import * as THREE from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-
+import { createGround } from './3dFeatures/ground.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const loader = new GLTFLoader();
-
-
 const renderer = new THREE.WebGLRenderer();
+
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 const controls = new PointerLockControls(camera, document.body);
 
 
-document.addEventListener('click', function () {
-	controls.lock();
-  }, false);
-
 //add skybox using the image in public folder
 const skybox = new THREE.Mesh(
 	new THREE.SphereGeometry(750, 32, 32),
 	new THREE.MeshBasicMaterial({
-	  map: new THREE.TextureLoader().load('/BlueSkySkybox.png'),
+	  map: new THREE.TextureLoader().load('/skybox.jpg'),
 	  side: THREE.BackSide,
 	})
   );
 
 scene.add(skybox);
 
-const geometry = new THREE.PlaneGeometry( 10, 30 );
-const material = new THREE.MeshStandardMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
 
-//add several planes to make a ground surface
-const ground = new THREE.Group();
-for (let i = 0; i < 10; i++) {
-
-	const plane = new THREE.Mesh( geometry, material );
-	plane.position.x = i * 10;
-	//make it rotate so the planes are flat'
-	plane.rotation.x = Math.PI / 2;
-	
-
-
-	ground.add(plane);
-	
-}
+const ground = createGround();
 scene.add(ground);
-
 
 
 loader.load( '/House_001_GLB.glb', function ( gltf ) {
@@ -62,11 +41,18 @@ loader.load( '/House_001_GLB.glb', function ( gltf ) {
 
 } );
 
-camera.position.y = 5;
+camera.position.y = 3;
 
 
-const light = new THREE.AmbientLight( 0xffffbb, 0x080820, 1 );
+const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
 scene.add( light );
+
+
+document.addEventListener('click', function () {
+	controls.lock();
+  }, false);
+
+
 
 let keys = {
 	up: false, // w
@@ -115,7 +101,7 @@ window.addEventListener('keydown', (e) => {
 
 
 function animate() {
-	const speed = 1; // adjust as needed
+	const speed = 0.5; // adjust as needed
 	const direction = new THREE.Vector3();
 
 	camera.getWorldDirection(direction);
