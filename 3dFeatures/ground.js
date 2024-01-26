@@ -11,8 +11,8 @@ export function createGround(){
 
         for (let j = 0; j < 10; j++) {
             const plane = new THREE.Mesh( geometry, material );
-            plane.position.x = i * 10;
-            plane.position.z = j * 10;
+            plane.position.x = (i - 5) * 10;
+            plane.position.z = (j - 5) * 10;
             
             //make it rotate so the planes are flat'
             plane.rotation.x = Math.PI / 2;

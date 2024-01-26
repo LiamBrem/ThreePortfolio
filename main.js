@@ -43,6 +43,18 @@ loader.load( '/Buildings/Stone Tower.glb', function ( gltf ) {
 
 } );
 
+loader.load( '/Buildings/Mill.glb', function ( gltf ) {
+
+	gltf.scene.scale.set(3, 3, 3);
+
+	scene.add( gltf.scene );
+
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+} );
+
 camera.position.y = 2;
 
 
