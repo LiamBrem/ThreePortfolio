@@ -10,6 +10,14 @@ export function createGround(){
     for (let i = 0; i < 10; i++) {
 
         for (let j = 0; j < 10; j++) {
+            //material.color.setHex(0x52FF33 + Math.random() * 0x0000FF);
+            // set each pane to either light green or dark green
+            if (Math.random() > 0.5) {
+                material.color.setHex(0x52FF33);
+            } else {
+                material.color.setHex(0x00FF00);
+            }
+
             const plane = new THREE.Mesh( geometry, material );
             plane.position.x = (i - 5) * 10;
             plane.position.z = (j - 5) * 10;

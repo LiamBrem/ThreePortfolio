@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Three JS Portfolio</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<script type="module" src="./main.js"></script>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>Three JS Portfolio</title>
+	<style>
+		body {
+			margin: 0;
+		}
+
+		#camera-coordinates {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			color: white;
+			background-color: rgba(0, 0, 0, 0.5);
+			padding: 10px;
+			border-radius: 5px;
+			z-index: 1000;
+		}
+	</style>
+</head>
+
+<body>
+	<script type="module" src="./main.js"></script>
+	<div id="camera-coordinates"></div>
+</body>
+
 </html>
