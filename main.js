@@ -50,6 +50,13 @@ function drawObject(modelPath, xPos, yPos, zPos, scale, rotation){
 	} );
 }
 
+function drawPath(xPos, zPos){
+	let modelPath = "/Buildings/Stone Walkway.glb";
+	let yPos = 1;
+	let scale = 3;
+	drawObject(modelPath, xPos, yPos, zPos, scale, 0);
+}
+
 //Draws 3d objects
 function createTerrain(){
 	loader.load( 'Valley Terrain.glb', function ( gltf ) {
@@ -71,6 +78,8 @@ function createTerrain(){
 	drawObject("/Buildings/Fantasy Sawmill.glb", 50, 0, 50, 4, 0);
 
 	drawObject("/Buildings/Market Stalls Compact.glb", 50, 0, 60, 4, 45)
+
+	drawPath(-5, -5);
 
 }
 

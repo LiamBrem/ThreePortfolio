@@ -3,19 +3,19 @@ import * as THREE from 'three';
 
 export function createGround(){
     const geometry = new THREE.PlaneGeometry( 10, 10 );
-    const material = new THREE.MeshStandardMaterial( {color: 0x52FF33, side: THREE.DoubleSide} );
+    
 
     //add several planes to make a ground surface
     const ground = new THREE.Group();
     for (let i = 0; i < 10; i++) {
 
         for (let j = 0; j < 10; j++) {
-            //material.color.setHex(0x52FF33 + Math.random() * 0x0000FF);
+            let material;
             // set each pane to either light green or dark green
             if (Math.random() > 0.5) {
-                material.color.setHex(0x52FF33);
+                material = new THREE.MeshStandardMaterial( {color: 0x52FF33, side: THREE.DoubleSide} );
             } else {
-                material.color.setHex(0x00FF00);
+                material = new THREE.MeshStandardMaterial( {color: 0x059100, side: THREE.DoubleSide} );
             }
 
             const plane = new THREE.Mesh( geometry, material );
