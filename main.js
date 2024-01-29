@@ -52,7 +52,7 @@ function drawObject(modelPath, xPos, yPos, zPos, scale, rotation){
 
 function drawPath(xPos, zPos){
 	let modelPath = "/Buildings/Stone Walkway.glb";
-	let yPos = 1;
+	let yPos = 0;
 	let scale = 3;
 	drawObject(modelPath, xPos, yPos, zPos, scale, 0);
 }
@@ -74,10 +74,13 @@ function createTerrain(){
 	
 
 	drawObject("/Buildings/Mill.glb", 10, 0, 10, 7, 0);
-	drawObject("/Buildings/Farm.glb", 40, 0, 40, 4, 0);
-	drawObject("/Buildings/Fantasy Sawmill.glb", 50, 0, 50, 4, 0);
+	//drawObject("/Buildings/Farm.glb", 40, 0, 40, 4, 0);
+	//drawObject("/Buildings/Fantasy Sawmill.glb", 50, 0, 50, 4, 0);
 
-	drawObject("/Buildings/Market Stalls Compact.glb", 50, 0, 60, 4, 45)
+	drawObject("/Buildings/Market Stalls Compact.glb", 25, 0, 240, 8, 0)
+	drawObject("/Buildings/Market Stalls.glb", 10, 0, 240, 8, 0)
+	drawObject("/Buildings/Fantasy Inn.glb", 50, 0, 280, 5, 4.71239)
+	drawObject("/Buildings/Fantasy House.glb", 10, 0, 280, 5, 1.5708)
 
 	drawPath(-5, -5);
 
@@ -86,6 +89,8 @@ function createTerrain(){
 
 
 camera.position.y = 2;
+camera.position.x =27;
+camera.position.z = 299;
 
 //add light
 const light = new THREE.DirectionalLight( 0xffffff, 7 );

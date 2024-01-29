@@ -7,15 +7,15 @@ export function createGround(){
 
     //add several planes to make a ground surface
     const ground = new THREE.Group();
-    for (let i = 0; i < 10; i++) {
+    for (let i = -8; i < 27; i++) {
 
-        for (let j = 0; j < 10; j++) {
+        for (let j = -5; j < 50; j++) {
             let material;
             // set each pane to either light green or dark green
             if (Math.random() > 0.5) {
-                material = new THREE.MeshStandardMaterial( {color: 0x52FF33, side: THREE.DoubleSide} );
+                material = new THREE.MeshStandardMaterial( {color: 0x79cf55, side: THREE.DoubleSide} );
             } else {
-                material = new THREE.MeshStandardMaterial( {color: 0x059100, side: THREE.DoubleSide} );
+                material = new THREE.MeshStandardMaterial( {color: 0x4e9e2c, side: THREE.DoubleSide} );
             }
 
             const plane = new THREE.Mesh( geometry, material );
