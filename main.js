@@ -111,7 +111,7 @@ function createTerrain() {
 
 	drawObject("/Buildings/Market Stand.glb", 49.5, 0, 271, 5, 4.71239);
 	drawObject("/Buildings/House (1).glb", 105, 0, 275, 12, 4.2);
-	drawObject("/Buildings/House (1).glb", -47, 0, 282, 12, 4.2);
+	drawObject("/Buildings/House (1).glb", -43, 0, 285, 12, 4.2);
 
 	drawObject("/Buildings/Windmill.glb", -27, 0, 216, 20, .75);
 
@@ -136,21 +136,27 @@ function createTerrain() {
 
 	drawObject("/Buildings/Mine.glb", -60, 0, 234, 12, 1.5708);
 	drawObject("/Buildings/Houses.glb", -16, 0, 200, 12, 1.5708);
+	drawObject("/Buildings/House.glb", -25, 0, 281, 12, 1.5708);
 
 	drawObject("/Nature/Pine Trees.glb", 150, 0, 257, 14, 1.5708);
 	drawObject("/Nature/Pine Trees.glb", 135, 0, 280, 14, 1.5708);
+	drawObject("/Nature/Pine Trees.glb", 120, 0, 208, 14, 1.5708);
 
 	drawObject("/Nature/Tree (1).glb", -12, 7, 213, 6, 3.14159);
+	drawObject("/Buildings/Barracks.glb", -57, 0, 274, 18, 0);
+	drawObject("/Nature/Tree (1).glb", -15, 7, 213, 6, 3.14159);
+	drawObject("/Nature/Tree (1).glb", -37, 7, 267, 6, 3.14159);
+	drawObject("/Nature/Tree.glb", -39, 0, 259, 1, 3.14159);
 
-
+	drawObject("/Nature/Rock.glb", 67, 0, 192, 5, 0);
+	drawObject("/Nature/Rock.glb", 79, 0, 208, 5, 0);
+	drawObject("/Nature/Rock Large.glb", -16, -1.5, 180, 3, 0);
+	drawObject("/Nature/Rock.glb", 0, 0, 180, 5, 0);
 
 
 	// path is 5.5 units wide
 	drawPath(27, 299);
 	drawPath(27, 293.5);
-
-
-
 }
 
 //true starting pos
