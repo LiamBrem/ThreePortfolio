@@ -77,7 +77,7 @@ function createTerrain() {
 
 	//spawn 
 	drawObject("/Buildings/Market Stalls Compact.glb", 26, 0, 257.26, 8, 0);
-	drawObject("/Buildings/Market Stalls.glb", 11.5, 0, 267.5, 8, 1.5708);
+	drawObject("/Buildings/Cart.glb", 11.5, 0, 272, 5, 1.5708);
 	drawObject("/Buildings/Fantasy Inn.glb", 50, 0, 280, 5, 4.71239);
 	drawObject("/Buildings/Fantasy House.glb", 10, 0, 280, 5, 1.5708);
 	drawObject("/Buildings/Business Building.glb", 10, 0, 295, 10, 1.5708);
@@ -92,12 +92,56 @@ function createTerrain() {
 	//square 
 	drawObject("/Buildings/Stone Tower.glb", 0, 0, 280, 20, 3.14159);
 	drawObject("/Buildings/Stone Tower (1).glb", 62, 0, 275, 20, 3.14159);
-	drawObject("/Buildings/Business Building.glb", 80, 0, 266, 12, 3.14159);
+	drawObject("/Buildings/Blacksmith.glb", 80, 0, 266, 6, 4.71239);
 	drawObject("/Buildings/Fantasy Sawmill.glb", -15, 0, 275, 7, 2.5);
 	drawObject("/Buildings/Mill.glb", -50, 0, 250, 7, 1.5708);
 
 	drawObject("/Buildings/Bell Tower.glb", 30, 0, 200, 7, 0);
 	drawObject("/Buildings/Well.glb", 27, 1, 238, 4, 0);
+
+	drawObject("/Buildings/Small Farm.glb", 80, 0, 240, 12, 4.71239);
+	drawObject("/Buildings/Farm.glb", 112, 0, 250, 12, 3.14159);
+
+	drawObject("/Buildings/Fantasy House.glb", 80, 0, 216, 6, 4.71239);
+	drawObject("/Nature/Tree (1).glb", 80, 7, 226, 6, 0);
+	drawObject("/Nature/Rock Large.glb", 94, -.5, 222, 2, 0);
+
+	drawObject("/Buildings/Fantasy House.glb", 73, 0, 200, 6, 5.6);
+	drawObject("/Buildings/Fantasy House.glb", 58, 0, 195, 6, 0);
+
+	drawObject("/Buildings/Market Stand.glb", 49.5, 0, 271, 5, 4.71239);
+	drawObject("/Buildings/House (1).glb", 105, 0, 275, 12, 4.2);
+	drawObject("/Buildings/House (1).glb", -47, 0, 282, 12, 4.2);
+
+	drawObject("/Buildings/Windmill.glb", -27, 0, 216, 20, .75);
+
+	drawObject("/Buildings/Fantasy Stable.glb", 4, 0, 195, 6, 1.2);
+	drawObject("/Buildings/House (2).glb", -50, 0, 225, 12, 0);
+	drawObject("/Buildings/House (3).glb", -35, 0, 215, 12, .75);
+
+	drawObject("/Buildings/Market Stalls.glb", 48, 0, 228, 8, 3.14159);
+	drawObject("/Buildings/Archery Towers.glb", 140, 0, 230, 12, 0);
+
+	//-133.16, y = 90.08, z = -118.05
+	drawObject("/Buildings/Windmill.glb", -133, 70, -110, 20, .75);
+
+	//-204.43, y = 127.18, z = -119.15
+	drawObject("/Buildings/Windmill.glb", -204, 127, -120, 20, 5.8);
+
+	drawObject("/Nature/Tree.glb", 40, 0, 203, 1, 0);
+	drawObject("/Nature/Wood Log.glb", 45, 0, 203, 1, 0.6);
+	drawObject("/Nature/Rock Large (1).glb", 42, -.5, 188, 3, 0);
+	drawObject("/Nature/Rock (1).glb", 19, 0, 193, 20, 0);
+	drawObject("/Nature/Rock.glb", 74, 0, 279, 5, 0);
+
+	drawObject("/Buildings/Mine.glb", -60, 0, 234, 12, 1.5708);
+	drawObject("/Buildings/Houses.glb", -16, 0, 200, 12, 1.5708);
+
+	drawObject("/Nature/Pine Trees.glb", 150, 0, 257, 14, 1.5708);
+	drawObject("/Nature/Pine Trees.glb", 135, 0, 280, 14, 1.5708);
+
+	drawObject("/Nature/Tree (1).glb", -12, 7, 213, 6, 3.14159);
+
 
 
 
@@ -136,6 +180,8 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 document.addEventListener('click', function () {
 	controls.lock();
 }, false);
+
+
 
 
 
