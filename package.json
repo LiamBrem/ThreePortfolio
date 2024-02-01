@@ -1,7 +1,10 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "build": "vite build",
+    "preview": "vite preview"
+
   },
   "dependencies": {
     "three": "0.160.1"
