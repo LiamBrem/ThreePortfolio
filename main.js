@@ -55,7 +55,7 @@ function drawObject(modelPath, xPos, yPos, zPos, scale, rotation) {
 }
 
 function drawPath(xPos, zPos) {
-	let modelPath = "/Buildings/Stone Walkway.glb";
+	let modelPath = "/Buildings/stonewalkway.glb";
 	let yPos = 0;
 	let scale = 3;
 	drawObject(modelPath, xPos, yPos, zPos, scale, 0);
