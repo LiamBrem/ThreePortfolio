@@ -24,7 +24,7 @@ const controls = new PointerLockControls(camera, document.body);
 const skybox = new THREE.Mesh(
 	new THREE.SphereGeometry(750, 32, 32),
 	new THREE.MeshBasicMaterial({
-		map: new THREE.TextureLoader().load('/skybox.jpg'),
+		map: new THREE.TextureLoader().load('skybox.jpg'),
 		side: THREE.BackSide,
 	})
 );
