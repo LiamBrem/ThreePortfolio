@@ -16,7 +16,7 @@ class Terrain {
     }
 
     createTerrain() {
-        this.loader.load('valleyterrain.glb', (gltf) => {
+        this.loader.load('/valleyterrain.glb', (gltf) => {
             gltf.scene.scale.set(3, 3, 3);
             gltf.scene.position.set(10, -12.75, -10);
             this.scene.add(gltf.scene);
@@ -30,7 +30,7 @@ class Terrain {
         this.drawObject("/Buildings/mill.glb", 10, 0, 10, 7, 0);
 
 		//spawn 
-    
+		/*
 		this.drawObject("/Buildings/marketstallscompact.glb", 26, 0, 257.26, 8, 0);
 		this.drawObject("/Buildings/cart.glb", 11.5, 0, 272, 5, 1.5708);
 		this.drawObject("/Buildings/fantasyinn.glb", 50, 0, 280, 5, 4.71239);
@@ -124,6 +124,7 @@ class Terrain {
 		this.drawObject("/Nature/tree1.glb", -28, 7, 291, 6, 3.14159);
 
 		this.drawObject("/Special/drone.glb", 73, 3, 241, 6, 3.14159);
+		*/
     }
 }
 
