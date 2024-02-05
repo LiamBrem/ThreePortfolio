@@ -25,6 +25,12 @@ class Terrain {
         });
     }
 
+	getAllObjects() {
+		return this.scene.children;
+	}
+
+
+
     drawAllObjects() {
         this.createTerrain();
         this.drawObject("/Buildings/mill.glb", 10, 0, 10, 7, 0);
@@ -77,10 +83,7 @@ class Terrain {
 		this.drawObject("/Buildings/marketstalls.glb", 48, 0, 228, 8, 3.14159);
 		this.drawObject("/Buildings/archerytowers.glb", 140, 0, 230, 15, 0);
 
-		//-133.16, y = 90.08, z = -118.05
 		this.drawObject("/Buildings/windmill.glb", -133, 70, -110, 20, .75);
-
-		//-204.43, y = 127.18, z = -119.15
 		this.drawObject("/Buildings/windmill.glb", -204, 127, -120, 20, 5.8);
 
 		this.drawObject("/Nature/tree.glb", 40, 0, 203, 1, 0);
@@ -131,10 +134,11 @@ class Terrain {
 export default Terrain;
 
 
-
+/*
 function drawPath(xPos, zPos) {
 	let modelPath = "/Buildings/Stone Walkway.glb";
 	let yPos = 0;
 	let scale = 3;
 	drawObject(modelPath, xPos, yPos, zPos, scale, 0);
 }
+*/

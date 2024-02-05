@@ -13,6 +13,9 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const loader = new GLTFLoader();
 const renderer = new THREE.WebGLRenderer();
+const raycaster = new THREE.Raycaster();
+
+
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -63,6 +66,7 @@ function drawPath(xPos, zPos) {
 
 const terrain = new Terrain(loader, scene);
 terrain.drawAllObjects();
+let objects = terrain.getAllObjects();
 
 //true starting pos
 /*
@@ -149,6 +153,7 @@ coordControls.addEventListener('change', function () {
 
 
 
+
 function animate() {
 	const speed = 0.5; // adjust as needed
 	const direction = new THREE.Vector3();
@@ -157,6 +162,43 @@ function animate() {
 	direction.y = 0; // ignore vertical direction
 	direction.normalize(); // normalize to ensure consistent speed
 
+	/// ------
+
+	raycaster.set(camera.position, direction);
+
+    const collisions = raycaster.intersectObjects(objects); // assuming 'objects' is an array of all objects in the scene
+
+    if (collisions.length > 0 && collisions[0].distance < 5) { // if there's a collision within 5 units
+        // don't move in the direction of the collision
+    } else {
+        if (keys.up) {
+            camera.position.add(direction.multiplyScalar(speed));
+        }
+        if (keys.down) {
+            camera.position.sub(direction.multiplyScalar(speed));
+        }
+    }
+
+    direction.cross(camera.up); // get right direction
+
+    raycaster.set(camera.position, direction);
+
+    const sideCollisions = raycaster.intersectObjects(objects);
+
+    if (sideCollisions.length > 0 && sideCollisions[0].distance < 5) {
+        // don't move in the direction of the collision
+    } else {
+        if (keys.left) {
+            camera.position.sub(direction.multiplyScalar(speed));
+        }
+        if (keys.right) {
+            camera.position.add(direction.multiplyScalar(speed));
+        }
+    }
+
+	/// -----
+
+	/*
 	if (keys.up) {
 		camera.position.add(direction.multiplyScalar(speed));
 	}
@@ -172,6 +214,7 @@ function animate() {
 	if (keys.right) {
 		camera.position.add(direction.multiplyScalar(speed));
 	}
+	*/
 
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
