@@ -8,6 +8,14 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { createGround } from './3dFeatures/ground.js';
 import Terrain from './terrain.js';
 
+import io from "socket.io-client";
+
+
+// connect to the server
+// const socket = io('http://localhost:3000');
+
+const socket = io("https://3000-fantastic-adventure-g7jq7gwwggvhv5x6.githubpreview.dev");
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -75,6 +83,7 @@ camera.position.x =27;
 camera.position.z = 299;
 */
 
+//for testing purposes
 camera.position.y = 2;
 camera.position.x = 44;
 camera.position.z = 244;
@@ -152,6 +161,11 @@ coordControls.addEventListener('change', function () {
 });
 
 
+function onPlayerMove(data) {
+	// move the player
+	socket.emit('player move', data);
+
+}
 
 
 function animate() {
@@ -162,59 +176,40 @@ function animate() {
 	direction.y = 0; // ignore vertical direction
 	direction.normalize(); // normalize to ensure consistent speed
 
-	/// ------
+	onPlayerMove({"TEST": "TEST"})
+
 
 	raycaster.set(camera.position, direction);
 
-    const collisions = raycaster.intersectObjects(objects); // assuming 'objects' is an array of all objects in the scene
+	const collisions = raycaster.intersectObjects(objects); // assuming 'objects' is an array of all objects in the scene
 
-    if (collisions.length > 0 && collisions[0].distance < 5) { // if there's a collision within 5 units
-        // don't move in the direction of the collision
-    } else {
-        if (keys.up) {
-            camera.position.add(direction.multiplyScalar(speed));
-        }
-        if (keys.down) {
-            camera.position.sub(direction.multiplyScalar(speed));
-        }
-    }
-
-    direction.cross(camera.up); // get right direction
-
-    raycaster.set(camera.position, direction);
-
-    const sideCollisions = raycaster.intersectObjects(objects);
-
-    if (sideCollisions.length > 0 && sideCollisions[0].distance < 5) {
-        // don't move in the direction of the collision
-    } else {
-        if (keys.left) {
-            camera.position.sub(direction.multiplyScalar(speed));
-        }
-        if (keys.right) {
-            camera.position.add(direction.multiplyScalar(speed));
-        }
-    }
-
-	/// -----
-
-	/*
-	if (keys.up) {
-		camera.position.add(direction.multiplyScalar(speed));
-	}
-	if (keys.down) {
-		camera.position.sub(direction.multiplyScalar(speed));
+	if (collisions.length > 0 && collisions[0].distance < 5) { // if there's a collision within 5 units
+		// don't move in the direction of the collision
+	} else {
+		if (keys.up) {
+			camera.position.add(direction.multiplyScalar(speed));
+		}
+		if (keys.down) {
+			camera.position.sub(direction.multiplyScalar(speed));
+		}
 	}
 
 	direction.cross(camera.up); // get right direction
 
-	if (keys.left) {
-		camera.position.sub(direction.multiplyScalar(speed));
+	raycaster.set(camera.position, direction);
+
+	const sideCollisions = raycaster.intersectObjects(objects);
+
+	if (sideCollisions.length > 0 && sideCollisions[0].distance < 5) {
+		// don't move in the direction of the collision
+	} else {
+		if (keys.left) {
+			camera.position.sub(direction.multiplyScalar(speed));
+		}
+		if (keys.right) {
+			camera.position.add(direction.multiplyScalar(speed));
+		}
 	}
-	if (keys.right) {
-		camera.position.add(direction.multiplyScalar(speed));
-	}
-	*/
 
 	requestAnimationFrame(animate);
 	renderer.render(scene, camera);
@@ -222,5 +217,13 @@ function animate() {
 	//updates the camera coordinates
 	cameraCoordinatesDiv.textContent = `Camera Position: x = ${camera.position.x.toFixed(2)}, y = ${camera.position.y.toFixed(2)}, z = ${camera.position.z.toFixed(2)}`;
 }
+
+
+socket.on('player move', (data) => {
+	console.log("player moved:", data);
+});
+
+
+
 
 animate();
